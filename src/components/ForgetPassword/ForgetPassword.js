@@ -11,8 +11,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Divider } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import LogoDark2 from "../../assest/LogoDark2.png";
+// import { FcGoogle } from "react-icons/fc";
+// import LogoDark2 from "../../assest/LogoDark2.png";
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
@@ -115,7 +115,7 @@ export default function ForgetPassword() {
 
         <Grid item xs={12} sm={8} md={12} >
             <div style={{ display: "flex", flexDirection: 'column', alignItems: 'center', maxWidth: '200px', margin: "10px auto " }}>
-                <img src={LogoDark2} alt="Logo" style={{ maxWidth: "90px" }} />
+                {/* <img src={LogoDark2} alt="Logo" style={{ maxWidth: "90px" }} /> */}
                 <Typography component="h1" variant="h5" style={{ color: '#0D0D2B', margin: '34px auto', fontWeight: '600' }}>
                     Reset Password
                 </Typography>

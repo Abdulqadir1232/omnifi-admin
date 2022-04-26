@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -14,6 +14,8 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import avatar from "assets/img/faces/marc.jpg";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const styles = {
   cardCategoryWhite: {
@@ -37,6 +39,13 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
+  const {id} = useParams()
+  const dispatch = useDispatch()
+  const {userDetails} = useSelector(state => state.user)
+  useEffect(()=>{
+    dispatch({type:"GET_USER",value:id})
+  },[])
+  console.log(userDetails)
   const classes = useStyles();
   return (
     <div>

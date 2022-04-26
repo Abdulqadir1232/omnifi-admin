@@ -15,7 +15,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
-// import { isLoggedIn } from "../../utils";
+import LogoDark2 from "../../assets/img/LogoDark2.png";
+import { isLoggedIn } from "../../utils";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -89,20 +90,19 @@ console.log("login i s calling")
     const classes = useStyles();
     const dispatch = useDispatch();
     const { login } = useSelector(state => state.user)
-    console.log(login, "login STATT")
     const notify = (message) => {
         toast.success(message);
     }
 
-    // function API(values) {
-    //     dispatch({ type: "LOGIN", values })
-    // }
+    function API(values) {
+        dispatch({ type: "LOGIN", values:{...values,callback:()=>history.push("/admin/dashboard")} })
+    }
 
     
 
-    // if (isLoggedIn()) {
-    //     return <Redirect to="/dashboard" />
-    // }
+    if (isLoggedIn()) {
+        return <Redirect to="/admin/dashboard" />
+    }
 
  
     return (<Grid
@@ -115,7 +115,7 @@ console.log("login i s calling")
 
         <Grid item xs={12} sm={8} md={12} >
             <div style={{ display: "flex", flexDirection: 'column', alignItems: 'center', maxWidth: '200px', margin: "10px auto " }}>
-                {/* <img src={LogoDark2} alt="Logo" style={{ maxWidth: "90px" }} /> */}
+                <img src={LogoDark2} alt="Logo" style={{ maxWidth: "90px" }} />
                 <Typography component="h1" variant="h5" style={{ color: '#0D0D2B', margin: '34px auto', fontWeight: '600' }}>
                     Sign in to OmniFi
                 </Typography>

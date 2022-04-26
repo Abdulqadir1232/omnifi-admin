@@ -12,7 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Card, Divider } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import LogoDark2 from "../../assest/LogoDark2.png";
+import LogoDark2 from "../../assets/img/LogoDark2.png";
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'

@@ -17,6 +17,8 @@ import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 import bgImage from "assets/img/sidebar-2.jpg";
 import logo from "../assets/img/Logo.png";
+import { isLoggedIn } from "utils";
+import UserProfile from "views/UserProfile/UserProfile";
 
 let ps;
 
@@ -34,7 +36,8 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/admin" to="/admin/dashboard" />
+    <Route path={"/admin/user/:id"} component={UserProfile}/>
+    {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
   </Switch>
 );
 
@@ -92,6 +95,9 @@ export default function Admin({ ...rest }) {
       window.removeEventListener("resize", resizeFunction);
     };
   }, [mainPanel]);
+  if(!isLoggedIn()) {
+    <Redirect to="/login" />
+  }
   return (
     <div className={classes.wrapper}>
       <Sidebar

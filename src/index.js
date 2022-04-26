@@ -33,6 +33,10 @@ import createSagaMiddleware from 'redux-saga'
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootSaga from '../src/store/Saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import ForgetPassword from "components/ForgetPassword/ForgetPassword";
+import ResetPassword from "components/ResetPassword/ResetPassword";
+import { isLoggedIn } from "utils";
+import UserProfile from "views/UserProfile/UserProfile";
 
 
 
@@ -53,8 +57,16 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
    
-    <Route path="/login" component={Login} />
-      <Route path="/admin" component={Admin} />
+    <Route path="/login"> 
+       <Login />
+    </Route> 
+    <Route path="/forget-password" component={ForgetPassword} />
+    <Route exact path="/reset-password/:id/:otp" component={ResetPassword} />
+
+      <Route path="/admin">{
+       <Admin />
+      } 
+      </Route> 
       <Route path="/rtl" component={RTL} />
       <Redirect from="/" to="/admin/dashboard" />
     </Switch>
