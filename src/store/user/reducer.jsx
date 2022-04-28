@@ -21,6 +21,10 @@ export default function userReducer(state = initialState, action) {
     case "SAVE_USER": {
       return { ...state, userDetails: action.data };
     }
+    case "GET_TRANSACTION": {
+      return { ...state, userDetails: action.data };
+    }
+    
     default:
       return state;
   }

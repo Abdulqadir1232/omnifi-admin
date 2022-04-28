@@ -46,6 +46,7 @@ export default function TableList() {
   const classes = useStyles();
   const dispatch = useDispatch()
   const {users} = useSelector(state => state.user)
+  
 
   useEffect(() => {
     dispatch({type:"Get_USERS"})
@@ -58,9 +59,9 @@ export default function TableList() {
         <Card>
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Users Table</h4>
-            <p className={classes.cardCategoryWhite}>
+            {/* <p className={classes.cardCategoryWhite}>
               Here is a subtitle for this table
-            </p>
+            </p> */}
           </CardHeader>
           <CardBody>
             <Table

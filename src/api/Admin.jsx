@@ -83,3 +83,14 @@ export function* getUser({ value }) {
   }).then((res) => res.json());
   yield put({ type: "SAVE_USER", data });
 }
+export function* gettransactionUsers() {
+  const token = localStorage.getItem("token");
+  let data = yield fetch(`${NEW_HOST}/admin/transaction`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + " " + token,
+    },
+  }).then((res) => res.json());
+  yield put({ type: "SAVE_ALL_USERS", data });
+}
