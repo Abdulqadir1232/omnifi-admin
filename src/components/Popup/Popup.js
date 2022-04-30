@@ -14,6 +14,7 @@ import NativeSelect from '@mui/material/NativeSelect';
 import CustomInput from "components/CustomInput/CustomInput.js";
 import CardHeader from "components/Card/CardHeader.js";
 import Dialog from '@mui/material/Dialog';
+import { border } from '@mui/system';
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
@@ -41,7 +42,7 @@ export default function TransactionPopup({showPopup,popUpData,setShowPopup}) {
       <Dialog onClose={()=>{setShowPopup(false)}} open={showPopup}>
       <GridContainer>
       <GridItem xs={12} sm={12} md={8} style={{maxWidth:'100%',flex:1}}>
-          <Card>
+          <Card  style={{boxShadow:"none"}}>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Amount </h4>
               {/* <p className={classes.cardCategoryWhite}>Complete your profile</p> */}
@@ -50,7 +51,6 @@ export default function TransactionPopup({showPopup,popUpData,setShowPopup}) {
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
-                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
                       labelText= {"User-Id"}
                       id="User-Id"
                       formControlProps={{
@@ -70,35 +70,17 @@ export default function TransactionPopup({showPopup,popUpData,setShowPopup}) {
                         fullWidth: true,
                       }}
                       inputProps={{
-                        disabled: true,
+                        // disabled: false,
                         value:popUpData[2],
                       }}
                     />
                   </GridItem>
-                  {/* <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Email address"
-                      id="email-address"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                    />
-                  </GridItem> */}
                 {/* </GridContainer> */}
                 {/* <GridContainer>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
                       labelText="First Name"
                       id="first-name"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="Last Name"
-                      id="last-name"
                       formControlProps={{
                         fullWidth: true,
                       }}
@@ -174,8 +156,8 @@ export default function TransactionPopup({showPopup,popUpData,setShowPopup}) {
                 </GridContainer> */}
               </CardBody>
               <CardFooter style={{justifyContent:"flex-end"}}>
-                <Button color="primary">Submit</Button>
-                <Button color="primary" onClick={()=>{setShowPopup(false)}}>Cancel</Button>
+                <Button  style={{backgroundColor:"#ab47bc",color:"white",borderRadius:"25px",border:"2px solid #ab47bc",marginRight:"8px"}}>Submit</Button>
+                <Button  style={{backgroundColor:"white",color:"#ab47bc", border:"1px solid #ab47bc",borderRadius:"25px"}} onClick={()=>{setShowPopup(false)}}>Cancel</Button>
               </CardFooter>
             </Card>
           </GridItem>
