@@ -6,7 +6,7 @@ function* adminActionWatcher() {
   yield takeLatest("FORGET_PASS", Admin.forgetpassword);
   yield takeLatest("Get_USERS", Admin.getALlUsers);
   yield takeLatest("GET_USER", Admin.getUser);
-  yield takeLatest("GET_TRANSACTION", Admin.gettransactionUsers);
+  yield takeLatest("GET_TRANSACTIONS", Admin.gettransactionUsers);
 
   yield takeLatest("RESET_PASSWORD", Admin.resetPassword);
 }

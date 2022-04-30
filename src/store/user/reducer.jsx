@@ -2,6 +2,7 @@
 const initialState = {
   users: [],
   userDetails: {},
+  transactionDetails: [],
 };
 
 export default function userReducer(state = initialState, action) {
@@ -21,10 +22,10 @@ export default function userReducer(state = initialState, action) {
     case "SAVE_USER": {
       return { ...state, userDetails: action.data };
     }
-    case "GET_TRANSACTION": {
-      return { ...state, userDetails: action.data };
+    case "SAVE_ALL_TRANSACTIONS": {
+      return { ...state, transactionDetails: action.data.data };
     }
-    
+
     default:
       return state;
   }

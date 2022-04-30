@@ -16,7 +16,7 @@ const useStyles = makeStyles(styles);
 export default function CustomTable(props) {
   const classes = useStyles();
   const history = useHistory()
-  const { tableHead, tableData, tableHeaderColor } = props;
+  const { tableHead, tableData, tableHeaderColor, setShowPopup, setPopupData} = props;
   return (
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>
@@ -39,7 +39,7 @@ export default function CustomTable(props) {
         <TableBody>
           {tableData.map((prop, key) => {
             return (
-              <TableRow onClick={()=>{history.push("/admin/user/"+prop[0]);}} key={key} className={classes.tableBodyRow}>
+              <TableRow onClick={()=>{setPopupData(prop);setShowPopup(true)}} key={key} className={classes.tableBodyRow}>
                 {console.log(prop)}
                 {prop.map((prop, key) => {
                   return (
