@@ -9,6 +9,8 @@ function* adminActionWatcher() {
   yield takeLatest("GET_TRANSACTIONS", Admin.gettransactionUsers);
   yield takeLatest("UPDATE_TRANSACTION", Admin.updateTransaction);
   yield takeLatest("RESET_PASSWORD", Admin.resetPassword);
+  yield takeLatest("CREATE_TRANSACTION",Admin.createTransaction);
+
 }
 
 export default function* rootSaga() {

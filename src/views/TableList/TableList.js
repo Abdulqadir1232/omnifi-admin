@@ -51,7 +51,7 @@ export default function TableList() {
 
   useEffect(() => {
     dispatch({ type: "Get_USERS" })
-  }, [users])
+  }, [])
   const getTableData = () => users.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance, user.interest]))
 
   return (
