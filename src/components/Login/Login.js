@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Login() {
-console.log("login i s calling")
+
     const history = useHistory();
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -95,10 +95,8 @@ console.log("login i s calling")
     }
 
     function API(values) {
-        dispatch({ type: "LOGIN", values:{...values,callback:()=>history.push("/admin/dashboard")} })
+        dispatch({ type: "LOGIN", values:{...values, callback:()=>history.push("/admin/dashboard")} })
     }
-
-    
 
     if (isLoggedIn()) {
         return <Redirect to="/admin/dashboard" />
@@ -124,8 +122,7 @@ console.log("login i s calling")
                 <Formik
                     initialValues={{ email: "", password: "" }}
                     onSubmit={async values => {
-                         
-                        console.log(values, "Values")
+                
                         API(values)
  
                     }}

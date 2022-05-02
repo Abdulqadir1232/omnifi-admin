@@ -23,7 +23,7 @@ export default function CustomTable(props) {
         {tableHead !== undefined ? (
           <TableHead className={classes[tableHeaderColor + "TableHeader"]}>
             <TableRow className={classes.tableHeadRow}>
-              {tableHead.map((prop, key) => {
+              {tableData!=""? tableHead.map((prop, key) => {
                 return (
                   <TableCell
                     className={classes.tableCell + " " + classes.tableHeadCell}
@@ -32,25 +32,34 @@ export default function CustomTable(props) {
                     {prop}
                   </TableCell>
                 );
-              })}
+              }):(<></>)}
             </TableRow>
           </TableHead>
         ) : null}
         <TableBody>
-          {tableData.map((prop, key) => {
+
+          {
+            tableData && (<>
+            {tableData.map((props, key) => {
             return (
-              <TableRow onClick={()=>{history.push("/admin/user/"+prop[0]);}} key={key} className={classes.tableBodyRow}>
-                {console.log(prop)}
-                {prop.map((prop, key) => {
+              <TableRow onClick={()=>{history.push("/admin/user/"+props[0]);}} key={key} className={classes.tableBodyRow}>
+               
+                {props.map((props, key) => {
                   return (
                     <TableCell className={classes.tableCell} key={key}>
-                      {prop}
+                      {props}
                     </TableCell>
                   );
                 })}
               </TableRow>
             );
-          })}
+          })} 
+            
+            
+            
+            </>)
+          }
+        
         </TableBody>
       </Table>
     </div>

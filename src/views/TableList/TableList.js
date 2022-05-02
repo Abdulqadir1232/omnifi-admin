@@ -8,7 +8,7 @@ import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const styles = {
   cardCategoryWhite: {
@@ -45,71 +45,37 @@ const useStyles = makeStyles(styles);
 export default function TableList() {
   const classes = useStyles();
   const dispatch = useDispatch()
-  const {users} = useSelector(state => state.user)
-  
+   const { users } = useSelector(state => ({ users:state.user.users }))
+//const users=[]
+
 
   useEffect(() => {
-    dispatch({type:"Get_USERS"})
-  }, [])
+    dispatch({ type: "Get_USERS" })
+  }, [users])
+  const getTableData = () => users.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance, user.interest]))
 
-  const getTableData = () => users.map(user => ([user.id,user.firstname,user.lastname,user.email,user.balance,user.interest]))
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Users Table</h4>
-            {/* <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p> */}
+
           </CardHeader>
           <CardBody>
-            <Table
+            {users.length!=0?(<> <Table
               tableHeaderColor="primary"
-              tableHead={["Id","First Name", "Last Name", "Email", "Balance", "Interest"]}
+              tableHead={["Id", "First Name", "Last Name", "Email", "Balance", "Interest"]}
               tableData={getTableData()}
-            />
+            /> </>):<><h4>
+No Data found
+            </h4>
+          </>}
+
           </CardBody>
         </Card>
       </GridItem>
-      {/* <GridItem xs={12} sm={12} md={12}>
-        <Card plain>
-          <CardHeader plain color="primary">
-            <h4 className={classes.cardTitleWhite}>
-              Table on Plain Background
-            </h4>
-            <p className={classes.cardCategoryWhite}>
-              Here is a subtitle for this table
-            </p>
-          </CardHeader>
-          <CardBody>
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["ID", "Name", "Country", "City", "Salary"]}
-              tableData={[
-                ["1", "Dakota Rice", "$36,738", "Niger", "Oud-Turnhout"],
-                ["2", "Minerva Hooper", "$23,789", "Curaçao", "Sinaai-Waas"],
-                ["3", "Sage Rodriguez", "$56,142", "Netherlands", "Baileux"],
-                [
-                  "4",
-                  "Philip Chaney",
-                  "$38,735",
-                  "Korea, South",
-                  "Overland Park",
-                ],
-                [
-                  "5",
-                  "Doris Greene",
-                  "$63,542",
-                  "Malawi",
-                  "Feldkirchen in Kärnten",
-                ],
-                ["6", "Mason Porter", "$78,615", "Chile", "Gloucester"],
-              ]}
-            />
-          </CardBody>
-        </Card>
-      </GridItem> */}
+
     </GridContainer>
   );
 }

@@ -55,25 +55,22 @@ export default function UserProfile() {
     setAge(event.target.value);
   };
   const [showPopup,setShowPopup] = React.useState(false)
-  const [popUpData,setPopupData] = React.useState(false)
+  const [popUpData,setPopupData] = React.useState([])
 
   const {id} = useParams()
   const dispatch = useDispatch()
-  const transactionDetails = useSelector(state=>state.user.transactionDetails)
-  console.log(transactionDetails)
+  const transactionDetails = useSelector(state=>({transactionDetails:state.user.transactionDetails}))
+
   useEffect(()=>{
     dispatch({type:"GET_TRANSACTIONS",value:id,})
   },[])
-  console.log(id)
+
+console.log(transactionDetails.transactionDetails)
   const classes = useStyles();
-  const getTableData = () => transactionDetails.map(t => ([t.user_id,t.amount,t.amount,t.transaction_type,t.status,t.created]))
+  const getTableData = () => transactionDetails.transactionDetails.map(t => ([t.id,t.user_id,t.amount,t.transaction_type,t.status,t.created]))
   return (
     <div>
       <GridContainer>
-       
-{/* table create */}
-
- 
 
        <GridItem xs={12} sm={12} md={12}>
        <Card>
@@ -84,13 +81,14 @@ export default function UserProfile() {
            </p> */}
          </CardHeader>
          <CardBody>
-           <Table
+           {transactionDetails.transactionDetails.length!=0?<>    <Table
              tableHeaderColor="primary"
-             tableHead={["User-id", "Name", "Amount","Transaction Type", "Status", "created"]}
+             tableHead={["id","UserId","Amount","Transaction Type", "Status", "created"]}
              tableData={getTableData()}
              setShowPopup={setShowPopup}
              setPopupData={setPopupData}
-           />
+           /></>:<h4>No Transaction Found </h4>}
+       
          </CardBody>
        </Card>
        <TransactionPopup showPopup={showPopup} popUpData={popUpData} setShowPopup={setShowPopup}/>
