@@ -144,7 +144,7 @@ export default function TransactionPopup({ showPopup, popUpData, setShowPopup })
                       className={classes.inputFields}
                       margin="20px"
                       size="small"
-                      value={new Date(formData.created)}
+                      value={new Date(formData.created).toLocaleString()}
                       type={"text"}
                       disabled
                       fullWidth

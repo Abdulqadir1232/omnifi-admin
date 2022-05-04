@@ -10,8 +10,13 @@ import TableCell from "@material-ui/core/TableCell";
 // core components
 import styles from "assets/jss/material-dashboard-react/components/tableStyle.js";
 import { useHistory } from "react-router-dom";
+const styl = {
+  tableCell:{
+    cursor:"pointer"
+  }
+};
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles(styl);
 
 export default function CustomTable(props) {
   const classes = useStyles();

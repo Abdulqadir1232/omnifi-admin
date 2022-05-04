@@ -77,7 +77,7 @@ export default function UserProfile() {
   },[])
 
   const classes = useStyles();
-  const getTableData = () => transactionDetails.transactionDetails.map(t => ([t.id,t.user_id,t.amount,t.transaction_type,t.status,t.created]))
+  const getTableData = () => transactionDetails.transactionDetails.map(t => ([t.id,t.user_id,t.amount,t.transaction_type,t.status,new Date(t.created).toLocaleString()]))
   return (
     <div>
       <GridContainer>
@@ -94,7 +94,7 @@ export default function UserProfile() {
          <CardBody>
            {transactionDetails.transactionDetails.length!=0?<>    <Table
              tableHeaderColor="primary"
-             tableHead={["id","UserId","Amount","Transaction Type", "Status", "created"]}
+             tableHead={["Id","UserId","Amount","Transaction Type", "Status", "Created"]}
              tableData={getTableData()}
              setShowPopup={setShowPopup}
              setPopupData={setPopupData}
