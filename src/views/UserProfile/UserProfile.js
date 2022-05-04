@@ -6,7 +6,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
+import Button from '@mui/material/Button';
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardAvatar from "components/Card/CardAvatar.js";
@@ -22,10 +22,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 
 
-import avatar from "assets/img/faces/marc.jpg";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import TransactionPopup from "../../components/Popup/Popup"
+import TransactionPopup1 from "../../components/Popup/popup1"
+import { boxShadow } from "assets/jss/material-dashboard-react";
 
 const styles = {
   cardCategoryWhite: {
@@ -44,6 +45,15 @@ const styles = {
     marginBottom: "3px",
     textDecoration: "none",
   },
+  button:{
+    
+
+    border: "none",
+    boxShadow: "2px 2px 7px #552361",
+    background: "#9c35b3",
+    borderRadius: "3px",
+    cursor:"pointer"
+  }
 };
 
 const useStyles = makeStyles(styles);
@@ -55,45 +65,46 @@ export default function UserProfile() {
     setAge(event.target.value);
   };
   const [showPopup,setShowPopup] = React.useState(false)
-  const [popUpData,setPopupData] = React.useState(false)
+  const [showPopup1,setShowPopupOne] = React.useState(false)
+  const [popUpData,setPopupData] = React.useState([])
 
   const {id} = useParams()
   const dispatch = useDispatch()
-  const transactionDetails = useSelector(state=>state.user.transactionDetails)
-  console.log(transactionDetails)
+  const transactionDetails = useSelector(state=>({transactionDetails:state.user.transactionDetails}))
+
   useEffect(()=>{
     dispatch({type:"GET_TRANSACTIONS",value:id,})
   },[])
-  console.log(id)
+
   const classes = useStyles();
-  const getTableData = () => transactionDetails.map(t => ([t.user_id,t.amount,t.amount,t.transaction_type,t.status,t.created]))
+  const getTableData = () => transactionDetails.transactionDetails.map(t => ([t.id,t.user_id,t.amount,t.transaction_type,t.status,new Date(t.created).toLocaleString()]))
   return (
     <div>
       <GridContainer>
-       
-{/* table create */}
-
- 
 
        <GridItem xs={12} sm={12} md={12}>
        <Card>
-         <CardHeader color="primary">
+         <CardHeader  color="primary">
+           <div style={{display:"flex",width:"100%",justifyContent:"space-between"}}>
            <h4 className={classes.cardTitleWhite}>Transactions History</h4>
-           {/* <p className={classes.cardCategoryWhite}>
-             Here is a subtitle for this table
-           </p> */}
+         
+          <Button style={{color:"white", fontSize:"14px"  , padding: "12px",}}  className={classes.button} onClick={() => { setShowPopupOne(true)}}>Create Transaction</Button>
+           </div>
          </CardHeader>
          <CardBody>
-           <Table
+           {transactionDetails.transactionDetails.length!=0?<>    <Table
              tableHeaderColor="primary"
-             tableHead={["User-id", "Name", "Amount","Transaction Type", "Status", "created"]}
+             tableHead={["Id","UserId","Amount","Transaction Type", "Status", "Created"]}
              tableData={getTableData()}
              setShowPopup={setShowPopup}
              setPopupData={setPopupData}
-           />
+           /></>:<h4>No Transaction Found </h4>}
+       
          </CardBody>
        </Card>
+       <TransactionPopup1 showPopup={showPopup1}  userId={id} setShowPopup={setShowPopupOne}/>
        <TransactionPopup showPopup={showPopup} popUpData={popUpData} setShowPopup={setShowPopup}/>
+ 
      </GridItem>
       </GridContainer>
     </div>

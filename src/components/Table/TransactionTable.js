@@ -10,8 +10,13 @@ import TableCell from "@material-ui/core/TableCell";
 // core components
 import styles from "assets/jss/material-dashboard-react/components/tableStyle.js";
 import { useHistory } from "react-router-dom";
+const styl = {
+  tableCell:{
+    cursor:"pointer"
+  }
+};
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles(styl);
 
 export default function CustomTable(props) {
   const classes = useStyles();
@@ -23,7 +28,7 @@ export default function CustomTable(props) {
         {tableHead !== undefined ? (
           <TableHead className={classes[tableHeaderColor + "TableHeader"]}>
             <TableRow className={classes.tableHeadRow}>
-              {tableHead.map((prop, key) => {
+              {tableHead && tableHead.map((prop, key) => {
                 return (
                   <TableCell
                     className={classes.tableCell + " " + classes.tableHeadCell}
@@ -37,10 +42,10 @@ export default function CustomTable(props) {
           </TableHead>
         ) : null}
         <TableBody>
-          {tableData.map((prop, key) => {
+          { tableData && tableData.map((prop, key) => {
             return (
               <TableRow onClick={()=>{setPopupData(prop);setShowPopup(true)}} key={key} className={classes.tableBodyRow}>
-                {console.log(prop)}
+            
                 {prop.map((prop, key) => {
                   return (
                     <TableCell className={classes.tableCell} key={key}>

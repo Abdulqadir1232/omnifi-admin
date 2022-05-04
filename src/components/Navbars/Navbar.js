@@ -41,13 +41,13 @@ export default function Header(props) {
           {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
         </Hidden>
         <Hidden mdUp implementation="css">
-          <IconButton
+          {/* <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={props.handleDrawerToggle}
           >
             <Menu />
-          </IconButton>
+          </IconButton> */}
         </Hidden>
       </Toolbar>
     </AppBar>

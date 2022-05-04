@@ -4,8 +4,6 @@ const NEW_HOST = "http://localhost:8080";
 
 export function* getAdmin({ values }) {
   const token = localStorage.getItem("token");
-  // const user = localStorage.getItem('user')
-  console.log("val");
   const data = yield fetch(`${NEW_HOST}/admin/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -19,8 +17,10 @@ export function* getAdmin({ values }) {
       throw error;
     });
   if (data.status) {
+    console.log(data);
     localStorage.token = data.token;
     localStorage.user = data.id;
+    localStorage.user_type = data.user_type;
     toast.success(data.message);
     values.callback();
   } else {
@@ -29,6 +29,7 @@ export function* getAdmin({ values }) {
   // console.log(data,"adada")
   yield put({ type: "GOT_ADMIN", data });
 }
+
 export function* resetPassword({ cred }) {
   let data = yield fetch(`${NEW_HOST}/resetPassword`, {
     method: "POST",
@@ -83,6 +84,7 @@ export function* getUser({ value }) {
   }).then((res) => res.json());
   yield put({ type: "SAVE_USER", data });
 }
+
 export function* gettransactionUsers({ value }) {
   const token = localStorage.getItem("token");
   let data = yield fetch(`${NEW_HOST}/admin/auth/transaction?id=${value}`, {
@@ -93,4 +95,44 @@ export function* gettransactionUsers({ value }) {
     },
   }).then((res) => res.json());
   yield put({ type: "SAVE_ALL_TRANSACTIONS", data });
+}
+
+export function* updateTransaction({ values }) {
+  const token = localStorage.getItem("token");
+  console.log(values);
+  let data = yield fetch(`${NEW_HOST}/admin/auth/transaction`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + " " + token,
+    },
+    body: JSON.stringify(values),
+  }).then((res) => res.json());
+  console.log(data);
+  if (data.status === true) {
+    toast.success(data.message);
+  } else if (data.status === false) {
+    toast.success(data.message);
+  }
+  // yield put({ type: "SAVE_ALL_TRANSACTIONS", data });
+}
+
+export function* createTransaction({ values }) {
+  const token = localStorage.getItem("token");
+  console.log(values);
+  let data = yield fetch(`${NEW_HOST}/admin/auth/createtransaction`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + " " + token,
+    },
+    body: JSON.stringify(values),
+  }).then((res) => res.json());
+  console.log(data);
+  if (data.status === true) {
+    toast.success(data.message);
+  } else if (data.status === false) {
+    toast.success(data.message);
+  }
+  // yield put({ type: "SAVE_ALL_TRANSACTIONS", data });
 }

@@ -65,35 +65,20 @@ const styles = {
   }
 };
 const useStyles = makeStyles(styles);
-export default function TransactionPopup({ showPopup, popUpData, setShowPopup }) {
+export default function TransactionPopup({ showPopup, userId, setShowPopup }) {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [formData, setFormData] = React.useState({})
-  React.useEffect(() => {
-
-
-    setFormData({ transactionId: popUpData[0], userId: popUpData[1], balance: popUpData[2], type: popUpData[3], status: "accept", created: popUpData[5] })
-
-  }, [popUpData])
-
-
+  const [formData, setFormData] = React.useState({userId})
 
 
   function submitForm() {
-    
-    dispatch({ type: "UPDATE_TRANSACTION", values: formData })
+   console.log(formData)
+     dispatch({ type: "CREATE_TRANSACTION", values: formData })
   }
 
 
   return (
     <>
-      {/* <Dialog onClose={()=>{setShowPopup(false)}} open={showPopup}>
-      <GridContainer>
-      <GridItem xs={12} sm={12} md={8} style={{maxWidth:'100%',flex:1,height:"100%"}}>
-          <Card  style={{boxShadow:"none",marginBottom:"0px"}}>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Amount </h4> */}
-              {/* <p className={classes.cardCategoryWhite}>Complete your profile</p> */}
       <Dialog onClose={() => { setShowPopup(false) }} open={showPopup}>
         <GridContainer>
           <GridItem xs={12} sm={12} md={8} style={{ maxWidth: '100%', flex: 1 }}>
@@ -110,7 +95,7 @@ export default function TransactionPopup({ showPopup, popUpData, setShowPopup })
                       className={classes.inputFields}
                       margin="small"
                       size="small"
-                      value={formData.userId}
+                      value={userId}
                       type={"text"}
                       disabled
                       fullWidth
@@ -118,17 +103,19 @@ export default function TransactionPopup({ showPopup, popUpData, setShowPopup })
 
                   </GridItem>
 
-                  <GridItem xs={12} sm={12} md={4}>
+              
+                  <GridItem xs={12} sm={3} md={5}>
                     <h4 className={classes.greyText}>Transaction Type</h4>
-                    <TextField
-                      className={classes.inputFields}
-                      margin="small"
-                      size="small"
-                      value={formData.type}
-                      type={"text"}
-                      disabled
-                      fullWidth
-                    />
+                    <Select fullWidth
+                      value={formData.status}
+
+                      onChange={(e) => { setFormData({ ...formData, ["type"]: e.target.value }) }}
+                    >
+                      <MenuItem value={"deposit"}>Deposit</MenuItem>
+                      <MenuItem value={"withdraw"}>Withdraw</MenuItem>
+
+                    </Select>
+
                   </GridItem>
 
                   <GridItem xs={12} sm={12} md={4}>
@@ -145,19 +132,19 @@ export default function TransactionPopup({ showPopup, popUpData, setShowPopup })
                       fullWidth
                     />
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
+                  {/* <GridItem xs={12} sm={12} md={6}>
                     <h4 className={classes.greyText}>Created At</h4>
                     <TextField
                       className={classes.inputFields}
                       margin="20px"
                       size="small"
-                      value={new Date(formData.created).toLocaleString()}
+                      value={new Date(formData.created)}
                       type={"text"}
                       disabled
                       fullWidth
                     />
-                  </GridItem>
-
+                  </GridItem> */}
+{/* 
                   <GridItem xs={12} sm={3} md={5}>
                     <h4 className={classes.greyText}>Status</h4>
                     <Select fullWidth
@@ -170,7 +157,7 @@ export default function TransactionPopup({ showPopup, popUpData, setShowPopup })
 
                     </Select>
 
-                  </GridItem>
+                  </GridItem> */}
 
                 </GridContainer>
 
@@ -183,7 +170,6 @@ export default function TransactionPopup({ showPopup, popUpData, setShowPopup })
           </GridItem>
         </GridContainer>
       </Dialog>
-
     </>
   )
-            }
+}
