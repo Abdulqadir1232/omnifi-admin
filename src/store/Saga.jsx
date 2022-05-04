@@ -10,6 +10,7 @@ function* adminActionWatcher() {
   yield takeLatest("UPDATE_TRANSACTION", Admin.updateTransaction);
   yield takeLatest("RESET_PASSWORD", Admin.resetPassword);
   yield takeLatest("CREATE_TRANSACTION",Admin.createTransaction);
+  yield takeLatest("GET_NOTIFICATION",Admin.getNotification);
 
 }
 

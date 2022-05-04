@@ -136,3 +136,17 @@ export function* createTransaction({ values }) {
   }
   // yield put({ type: "SAVE_ALL_TRANSACTIONS", data });
 }
+
+export function* getNotification() {
+  const token = localStorage.getItem("token");
+  let data = yield fetch(`${NEW_HOST}/admin/auth/getnotification`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + " " + token,
+    },
+  }).then((res) => res.json());
+
+
+ yield put({ type: "GET_NOTOFICATION", data });
+}

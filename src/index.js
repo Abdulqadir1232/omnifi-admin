@@ -38,9 +38,6 @@ import ResetPassword from "components/ResetPassword/ResetPassword";
 import { isLoggedIn } from "utils";
 import UserProfile from "views/UserProfile/UserProfile";
 
-
-
-
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
 const enhancer = process.env.NODE_ENV === 'production'
@@ -62,7 +59,7 @@ ReactDOM.render(
     </Route> 
     <Route path="/forget-password" component={ForgetPassword} />
     <Route exact path="/reset-password/:id/:otp" component={ResetPassword} />
-
+  
       <Route path="/admin">{
        <Admin />
       } 

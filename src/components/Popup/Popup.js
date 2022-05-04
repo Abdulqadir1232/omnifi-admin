@@ -15,8 +15,8 @@ import Dialog from '@mui/material/Dialog';
 import TextField from "@material-ui/core/TextField";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import { useDispatch} from 'react-redux';
-import {ToastContainer,toast} from 'react-toastify'
+import { useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.css"
 const styles = {
@@ -75,7 +75,7 @@ export default function TransactionPopup({ showPopup, popUpData, setShowPopup })
 
   }, [popUpData])
 
-console.log(popUpData)
+  console.log(popUpData)
   const notify = (message) => {
     toast.success(message);
   }
@@ -93,11 +93,11 @@ console.log(popUpData)
           <Card  style={{boxShadow:"none",marginBottom:"0px"}}>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Amount </h4> */}
-              {/* <p className={classes.cardCategoryWhite}>Complete your profile</p> */}
+      {/* <p className={classes.cardCategoryWhite}>Complete your profile</p> */}
       <Dialog onClose={() => { setShowPopup(false) }} open={showPopup}>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={8} style={{ maxWidth: '100%', flex: 1 ,height:"100%"}}>
-            <Card style={{ boxShadow: "none",marginBottom:"0px" }}>
+          <GridItem xs={12} sm={12} md={8} style={{ maxWidth: '100%', flex: 1, height: "100%" }}>
+            <Card style={{ boxShadow: "none", marginBottom: "0px" }}>
               <CardHeader color="primary">
                 <h4 className={classes.cardTitleWhite}>Amount </h4>
 
@@ -114,7 +114,7 @@ console.log(popUpData)
                       type={"text"}
                       disabled
                       fullWidth
-                    /> 
+                    />
 
                   </GridItem>
 
@@ -187,4 +187,4 @@ console.log(popUpData)
 
     </>
   )
-            }
+}

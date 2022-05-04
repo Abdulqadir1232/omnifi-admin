@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -39,10 +39,23 @@ import {
 } from "variables/charts.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-
+import { useHistory } from "react-router-dom";
 const useStyles = makeStyles(styles);
-
+import { useDispatch, useSelector } from "react-redux";
 export default function Dashboard() {
+
+  
+	const {   getNotification} = useSelector((state) => ({   getNotification: state.user.  getNotification }));
+
+
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch({type:"GET_NOTIFICATION"})
+  },[])
+
+const handleChange =()=>{
+
+}
   const classes = useStyles();
   return (
     <div>
@@ -123,7 +136,48 @@ export default function Dashboard() {
         </GridItem> */}
       </GridContainer>
       <GridContainer>
-        {/* <GridItem xs={12} sm={12} md={4}>
+      {/* <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="warning" stats icon>
+              <CardIcon color="warning">
+                <Icon>content_copy</Icon>
+              </CardIcon>
+              <p className={classes.cardCategory}>Used Space</p>
+              <h3 className={classes.cardTitle}>
+                49/50 <small>GB</small>
+              </h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <Danger>
+                  <Warning />
+                </Danger>
+                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                  Get more space
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem> */}
+        <GridItem xs={12} sm={6} md={3}>
+          <Card onClick={()=>  history.push("/admin/user/awaiting")} >
+            <CardHeader color="success" stats icon>
+              <CardIcon color="success">
+                <Store />
+              </CardIcon>
+              <p className={classes.cardCategory}>Awaiting</p>
+              {  getNotification.length && (<>   <h3 className={classes.cardTitle}>{getNotification[0].count}</h3></>)}
+           
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <DateRange />
+                Last 24 Hours
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+       {/*  <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="success">
               <ChartistGraph
