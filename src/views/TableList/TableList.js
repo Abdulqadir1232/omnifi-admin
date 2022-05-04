@@ -79,8 +79,8 @@ export default function TableList() {
 
   }, [users])
 
-  const getSearchTableData = () => userData.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance, (user.interest).toFixed(4)]))
-  const getTableData = () => users.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance, (user.interest).toFixed(4)]))
+  const getSearchTableData = () => userData.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance,parseFloat(user.interest).toFixed(4)]))
+  const getTableData = () => users.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance,parseFloat(user.interest).toFixed(7)]))
 
   return (
     <GridContainer>
@@ -173,20 +173,17 @@ export default function TableList() {
 
           </CardHeader>
 
-{userData ?(<>
+          {userData? (<>
 
-  <CardBody>
-            {users.length != 0 ? (<> <Table
-              tableHeaderColor="primary"
-              tableHead={["Id", "First Name", "Last Name", "Email", "Balance", "Interest"]}
-              tableData={getSearchTableData()}
-            /> </>) : <><h4>
-              No Data found
-            </h4>
-            </>}
+            <CardBody>
+              {users.length != 0 ? (<> <Table
+                tableHeaderColor="primary"
+                tableHead={["Id", "First Name", "Last Name", "Email", "Balance", "Interest"]}
+                tableData={getSearchTableData()}
+              /> </>):null}
 
-          </CardBody>
-</>):(<><CardBody>
+            </CardBody>
+          </>) : (<><CardBody>
             {users.length != 0 ? (<> <Table
               tableHeaderColor="primary"
               tableHead={["Id", "First Name", "Last Name", "Email", "Balance", "Interest"]}
@@ -199,7 +196,7 @@ export default function TableList() {
           </CardBody></>)}
 
 
-      
+
         </Card>
       </GridItem>
 

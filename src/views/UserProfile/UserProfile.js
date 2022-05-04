@@ -42,7 +42,7 @@ const styles = {
     minHeight: "auto",
     fontWeight: "300",
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
+    marginBottom: "0px",
     textDecoration: "none",
   },
   button:{
@@ -77,24 +77,31 @@ export default function UserProfile() {
   },[])
 
   const classes = useStyles();
-  const getTableData = () => transactionDetails.transactionDetails.map(t => ([t.id,t.user_id,t.amount,t.transaction_type,t.status,new Date(t.created).toLocaleString()]))
+
+  const getTableData = () => transactionDetails.transactionDetails.map(t => ([t.id,t.amount,t.transaction_type,t.status,new Date(t.created).toLocaleString()]))
   return (
     <div>
       <GridContainer>
 
        <GridItem xs={12} sm={12} md={12}>
        <Card>
-         <CardHeader  color="primary">
-           <div style={{display:"flex",width:"100%",justifyContent:"space-between"}}>
-           <h4 className={classes.cardTitleWhite}>Transactions History</h4>
+         <CardHeader  color="primary">   
+         {transactionDetails.transactionDetails.length!=0?<h4>{(transactionDetails.transactionDetails[0].firstname).toUpperCase()}  {(transactionDetails.transactionDetails[0].lastname).toUpperCase()}</h4>:<></>}
          
-          <Button style={{color:"white", fontSize:"14px"  , padding: "12px",}}  className={classes.button} onClick={() => { setShowPopupOne(true)}}>Create Transaction</Button>
+         
+               <div style={{display:"flex",width:"100%",justifyContent:"space-between",alignItems:"center"}}>
+           {/* */}
+       
+           <h4 className={classes.cardTitleWhite}>Transactions History</h4> 
+  
+          <Button style={{color:"white", fontSize:"14px",height:"40px"}}  className={classes.button} onClick={() => { setShowPopupOne(true)}}>Create Transaction</Button>
            </div>
          </CardHeader>
          <CardBody>
-           {transactionDetails.transactionDetails.length!=0?<>    <Table
+           {transactionDetails.transactionDetails.length!=0?<> 
+              <Table
              tableHeaderColor="primary"
-             tableHead={["Id","UserId","Amount","Transaction Type", "Status", "Created"]}
+             tableHead={["Id","Amount","Transaction Type", "Status", "Created"]}
              tableData={getTableData()}
              setShowPopup={setShowPopup}
              setPopupData={setPopupData}
