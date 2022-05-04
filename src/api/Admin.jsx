@@ -26,7 +26,7 @@ export function* getAdmin({ values }) {
   } else {
     toast.error(data.message);
   }
-  // console.log(data,"adada")
+window.location.reload()
   yield put({ type: "GOT_ADMIN", data });
 }
 

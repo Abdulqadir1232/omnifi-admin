@@ -61,7 +61,7 @@ export default function TableList() {
   const [searchData, setSearchData] = React.useState()
   const [userData, setUserData] = React.useState()
   const searchHandle = (values) => {
-
+    console.log(values.email)
 
     const searchedMovies = searchData.filter((item) => item.firstname.toLowerCase().includes(values.email));
     setUserData(searchedMovies)
@@ -70,17 +70,20 @@ export default function TableList() {
   }
 
 
+
   useEffect(() => {
     dispatch({ type: "Get_USERS" })
 
   }, [])
+
+
   useEffect(() => {
     setSearchData(users)
 
   }, [users])
 
-  const getSearchTableData = () => userData.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance,parseFloat(user.interest).toFixed(4)]))
-  const getTableData = () => users.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance,parseFloat(user.interest).toFixed(9)]))
+  const getSearchTableData = () => userData.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance, parseFloat(user.interest).toFixed(4)]))
+  const getTableData = () => users.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance, parseFloat(user.interest).toFixed(9)]))
 
   return (
     <GridContainer>
@@ -140,7 +143,7 @@ export default function TableList() {
                           )}
                         </div>
                         <div style={{ marginLeft: "40px", marginTop: "10px" }}>
-                          <Button type="submit" color="white" aria-label="edit" justIcon round onClick={searchHandle}>
+                          <Button type="submit" color="white" aria-label="edit" justIcon round >
                             <Search color="white" />
                           </Button>
                         </div>
@@ -173,14 +176,14 @@ export default function TableList() {
 
           </CardHeader>
 
-          {userData? (<>
+          {userData ? (<>
 
             <CardBody>
               {users.length != 0 ? (<> <Table
                 tableHeaderColor="primary"
                 tableHead={["Id", "First Name", "Last Name", "Email", "Balance", "Interest"]}
                 tableData={getSearchTableData()}
-              /> </>):null}
+              /> </>) : null}
 
             </CardBody>
           </>) : (<><CardBody>
