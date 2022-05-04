@@ -80,7 +80,7 @@ export default function TableList() {
   }, [users])
 
   const getSearchTableData = () => userData.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance,parseFloat(user.interest).toFixed(4)]))
-  const getTableData = () => users.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance,parseFloat(user.interest).toFixed(7)]))
+  const getTableData = () => users.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance,parseFloat(user.interest).toFixed(9)]))
 
   return (
     <GridContainer>

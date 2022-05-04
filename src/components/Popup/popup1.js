@@ -22,6 +22,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from 'react-redux';
 import {ToastContainer,toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "./index.css"
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",

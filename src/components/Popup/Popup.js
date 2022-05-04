@@ -8,21 +8,17 @@ import GridContainer from "components/Grid/GridContainer.js";
 import { makeStyles } from "@material-ui/core/styles";
 import CardFooter from "components/Card/CardFooter.js";
 import CardBody from "components/Card/CardBody.js";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from '@mui/material/InputAdornment';
-import NativeSelect from '@mui/material/NativeSelect';
-import CustomInput from "components/CustomInput/CustomInput.js";
+
 import CardHeader from "components/Card/CardHeader.js";
 import Dialog from '@mui/material/Dialog';
-import { border } from '@mui/system';
-import Typography from "@material-ui/core/Typography";
+
 import TextField from "@material-ui/core/TextField";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import {ToastContainer,toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-
+import "./index.css"
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
@@ -79,7 +75,7 @@ export default function TransactionPopup({ showPopup, popUpData, setShowPopup })
 
   }, [popUpData])
 
-
+console.log(popUpData)
   const notify = (message) => {
     toast.success(message);
   }
@@ -155,7 +151,7 @@ export default function TransactionPopup({ showPopup, popUpData, setShowPopup })
                       className={classes.inputFields}
                       margin="20px"
                       size="small"
-                      value={new Date(formData.created).toLocaleString()}
+                      value={formData.created}
                       type={"text"}
                       disabled
                       fullWidth
