@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
 
 const styl = {
   tableCell:{
-    cursor:"pointer"
+    cursor:"pointer",
   }
 };
 
