@@ -41,8 +41,8 @@ export default function TransactionPopup({showPopup,popUpData,setShowPopup}) {
     <>
       <Dialog onClose={()=>{setShowPopup(false)}} open={showPopup}>
       <GridContainer>
-      <GridItem xs={12} sm={12} md={8} style={{maxWidth:'100%',flex:1}}>
-          <Card  style={{boxShadow:"none"}}>
+      <GridItem xs={12} sm={12} md={8} style={{maxWidth:'100%',flex:1,height:"100%"}}>
+          <Card  style={{boxShadow:"none",marginBottom:"0px"}}>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Amount </h4>
               {/* <p className={classes.cardCategoryWhite}>Complete your profile</p> */}
