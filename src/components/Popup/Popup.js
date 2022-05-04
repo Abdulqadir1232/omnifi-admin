@@ -118,7 +118,7 @@ export default function TransactionPopup({ showPopup, popUpData, setShowPopup })
                       type={"text"}
                       disabled
                       fullWidth
-                    />
+                    /> 
 
                   </GridItem>
 
