@@ -26,7 +26,7 @@ import Login from "./components/Login/Login"
 import "assets/css/material-dashboard-react.css?v=1.10.0";
 import appReducer from '../src/store';
 
-
+require('dotenv').config()
 
 import { Provider as StoreProvider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga'

@@ -1,7 +1,6 @@
 import { put } from "redux-saga/effects";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 const NEW_HOST = "http://localhost:8080";
-
 export function* getAdmin({ values }) {
   const token = localStorage.getItem("token");
   const data = yield fetch(`${NEW_HOST}/admin/login`, {
@@ -10,14 +9,12 @@ export function* getAdmin({ values }) {
     body: JSON.stringify(values),
   })
     .then((res) => {
-      console.log({ res });
       return res.json();
     })
     .catch((error) => {
       throw error;
     });
   if (data.status) {
-    console.log(data);
     localStorage.token = data.token;
     localStorage.user = data.id;
     localStorage.user_type = data.user_type;
@@ -99,7 +96,7 @@ export function* gettransactionUsers({ value }) {
 
 export function* updateTransaction({ values }) {
   const token = localStorage.getItem("token");
-  console.log(values);
+
   let data = yield fetch(`${NEW_HOST}/admin/auth/transaction`, {
     method: "POST",
     headers: {
@@ -108,18 +105,18 @@ export function* updateTransaction({ values }) {
     },
     body: JSON.stringify(values),
   }).then((res) => res.json());
-  console.log(data);
+
   if (data.status === true) {
     toast.success(data.message);
   } else if (data.status === false) {
     toast.success(data.message);
   }
-  // yield put({ type: "SAVE_ALL_TRANSACTIONS", data });
+  yield put({ type: "UPDATE_TRANSACTION", data });
 }
 
 export function* createTransaction({ values }) {
   const token = localStorage.getItem("token");
-  console.log(values);
+
   let data = yield fetch(`${NEW_HOST}/admin/auth/createtransaction`, {
     method: "POST",
     headers: {
@@ -128,7 +125,7 @@ export function* createTransaction({ values }) {
     },
     body: JSON.stringify(values),
   }).then((res) => res.json());
-  console.log(data);
+
   if (data.status === true) {
     toast.success(data.message);
   } else if (data.status === false) {
@@ -147,8 +144,7 @@ export function* getNotification() {
     },
   }).then((res) => res.json());
 
-
- yield put({ type: "GOT_NOTIFICATION", data });
+  yield put({ type: "GOT_NOTIFICATION", data });
 }
 
 export function* getNewTransaction() {
@@ -160,5 +156,5 @@ export function* getNewTransaction() {
       Authorization: "Bearer" + " " + token,
     },
   }).then((res) => res.json());
- yield put({ type: "GET_NEW_TRANSACTIONS", data });
+  yield put({ type: "GET_NEW_TRANSACTIONS", data });
 }

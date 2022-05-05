@@ -71,15 +71,15 @@ const useStyles = makeStyles(styles);
 export default function TransactionPopup({ showPopup, userId, setShowPopup }) {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [formData, setFormData] = React.useState({userId})
+  const [formData, setFormData] = React.useState({userId,created:new Date()})
   const notify = (message) => {
     toast.success(message);
   }
  
 
   function submitForm() {
-   console.log(formData)
-     dispatch({ type: "CREATE_TRANSACTION", values: formData })
+
+      dispatch({ type: "CREATE_TRANSACTION", values: formData })
   }
 
 
@@ -138,18 +138,19 @@ export default function TransactionPopup({ showPopup, userId, setShowPopup }) {
                       fullWidth
                     />
                   </GridItem>
-                  {/* <GridItem xs={12} sm={12} md={6}>
+                  <GridItem xs={12} sm={12} md={6}>
                     <h4 className={classes.greyText}>Created At</h4>
                     <TextField
                       className={classes.inputFields}
                       margin="20px"
                       size="small"
-                      value={new Date(formData.created)}
+                      onChange={(e) => { setFormData({ ...formData, ["created"]: e.target.value }) }}
+                      value={formData.created.toLocaleString()}
                       type={"text"}
-                      disabled
+                      
                       fullWidth
                     />
-                  </GridItem> */}
+                  </GridItem>
 {/* 
                   <GridItem xs={12} sm={3} md={5}>
                     <h4 className={classes.greyText}>Status</h4>

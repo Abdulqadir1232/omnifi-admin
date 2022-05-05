@@ -4,7 +4,8 @@ const initialState = {
   userDetails: {},
   transactionDetails: [],
   getNotification:[],
-  getNewTransactions:[]
+  getNewTransactions:[],
+  UpdateTransactions:{}
 };
 
 export default function userReducer(state = initialState, action) {
@@ -32,6 +33,9 @@ export default function userReducer(state = initialState, action) {
     }
     case"GET_NEW_TRANSACTIONS":{
       return { ...state, getNewTransactions: action.data.data };
+    }
+    case "UPDATE_TRANSACTION":{
+      return { ...state, UpdateTransactions: action.data};
     }
     default:
       return state;
