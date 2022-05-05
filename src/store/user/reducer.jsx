@@ -3,7 +3,8 @@ const initialState = {
   users: [],
   userDetails: {},
   transactionDetails: [],
-  getNotification:[]
+  getNotification:[],
+  getNewTransactions:[]
 };
 
 export default function userReducer(state = initialState, action) {
@@ -26,10 +27,12 @@ export default function userReducer(state = initialState, action) {
     case "SAVE_ALL_TRANSACTIONS": {
       return { ...state, transactionDetails: action.data.data };
     }
-    case"GET_NOTOFICATION":{
+    case"GOT_NOTIFICATION":{
       return { ...state, getNotification: action.data.data };
     }
-
+    case"GET_NEW_TRANSACTIONS":{
+      return { ...state, getNewTransactions: action.data.data };
+    }
     default:
       return state;
   }

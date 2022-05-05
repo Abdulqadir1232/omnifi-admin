@@ -61,7 +61,7 @@ export default function TableList() {
   const [searchData, setSearchData] = React.useState()
   const [userData, setUserData] = React.useState()
   const searchHandle = (values) => {
-    console.log(values.email)
+
 
     const searchedMovies = searchData.filter((item) => item.firstname.toLowerCase().includes(values.email));
     setUserData(searchedMovies)

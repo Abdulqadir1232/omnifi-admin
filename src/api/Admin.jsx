@@ -26,7 +26,7 @@ export function* getAdmin({ values }) {
   } else {
     toast.error(data.message);
   }
-window.location.reload()
+
   yield put({ type: "GOT_ADMIN", data });
 }
 
@@ -148,5 +148,17 @@ export function* getNotification() {
   }).then((res) => res.json());
 
 
- yield put({ type: "GET_NOTOFICATION", data });
+ yield put({ type: "GOT_NOTIFICATION", data });
+}
+
+export function* getNewTransaction() {
+  const token = localStorage.getItem("token");
+  let data = yield fetch(`${NEW_HOST}/admin/auth/getnewtransaction`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + " " + token,
+    },
+  }).then((res) => res.json());
+ yield put({ type: "GET_NEW_TRANSACTIONS", data });
 }
