@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
     },
     greyText: {
-        fontFamily: "Rubik",
+    
         fontStyle: "normal",
         fontWeight: "500",
         fontSize: "14px",
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 
         background: "#0D0D2B",
         borderRadius: "50px",
-        fontFamily: "Rubik",
+     
         fontStyle: "normal",
         fontWeight: "700",
         fontSize: "14px",
