@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import Pagination from "react-responsive-pagination";
 // core components
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -57,7 +58,7 @@ export default function TableList() {
   const classes = useStyles();
   const dispatch = useDispatch()
   const { users } = useSelector(state => ({ users: state.user.users }))
-
+  const [currentPage,setCurrentPage] = React.useState(1)
   const [searchData, setSearchData] = React.useState()
   const [userData, setUserData] = React.useState()
   const searchHandle = (values) => {
@@ -84,18 +85,27 @@ export default function TableList() {
 
   const getSearchTableData = () => userData.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance, parseFloat(user.interest).toFixed(4)]))
   const getTableData = () => users.map(user => ([user.id, user.firstname, user.lastname, user.email, user.balance, parseFloat(user.interest).toFixed(9)]))
-
+  function paginate(array, page_size, page_number) {
+    return array.slice((page_number - 1) * page_size, page_number * page_size);
+  }
+  const pageSize = 10;
   return (
     <GridContainer>
+       <head>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"/>
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+            </head>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="primary">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
 
-              <h4 className={classes.cardTitleWhite}>Users Table</h4>
+                <h4 className={classes.cardTitleWhite}>Users Table</h4>
 
 
-              <div  >
+                <div  >
                 <Formik
                   initialValues={{ email: "", }}
                   onSubmit={async values => {
@@ -190,7 +200,7 @@ export default function TableList() {
             {users.length != 0 ? (<> <Table
               tableHeaderColor="primary"
               tableHead={["Id", "First Name", "Last Name", "Email", "Balance", "Interest"]}
-              tableData={getTableData()}
+              tableData={paginate(getTableData(),pageSize,currentPage)}
             /> </>) : <><h4>
               No Data found
             </h4>
@@ -199,7 +209,7 @@ export default function TableList() {
           </CardBody></>)}
 
 
-
+          <Pagination current={currentPage} total={Math.ceil(users.length/pageSize)} onPageChange={(value) => setCurrentPage(value)} />
         </Card>
       </GridItem>
 
